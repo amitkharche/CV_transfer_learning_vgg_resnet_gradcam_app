@@ -14,7 +14,6 @@ def compare_models(results):
 if __name__ == "__main__":
     sample_results = [
         {"name": "VGG", "accuracy": 0.88},
-        {"name": "ResNet", "accuracy": 0.91},
-        {"name": "ViT", "accuracy": 0.89}
+        {"name": "ResNet", "accuracy": 0.91}
     ]
     compare_models(sample_results)

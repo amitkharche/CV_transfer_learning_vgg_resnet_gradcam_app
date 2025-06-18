@@ -10,7 +10,6 @@ from tqdm import tqdm
 
 from src.preprocessing.custom_loader import get_data_loaders
 from src.models.vgg_resnet import get_vgg_model, get_resnet_model
-from src.models.vision_transformer import get_vit_model
 
 import argparse
 
@@ -28,10 +27,8 @@ def train(model_type='vgg', data_dir='data/', save_path='output/model.pth', epoc
         model = get_vgg_model(num_classes)
     elif model_type == 'resnet':
         model = get_resnet_model(num_classes)
-    elif model_type == 'vit':
-        model = get_vit_model()
     else:
-        raise ValueError("Unsupported model type. Choose from ['vgg', 'resnet', 'vit'].")
+        raise ValueError("Unsupported model type. Choose from ['vgg', 'resnet'].")
 
     model.to(device)
     criterion = nn.CrossEntropyLoss()
@@ -47,8 +44,6 @@ def train(model_type='vgg', data_dir='data/', save_path='output/model.pth', epoc
             images, labels = images.to(device), labels.to(device)
             optimizer.zero_grad()
             outputs = model(images)
-            if model_type == 'vit':
-                outputs = outputs.logits
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
@@ -66,7 +61,7 @@ def train(model_type='vgg', data_dir='data/', save_path='output/model.pth', epoc
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train a Vision Model using Transfer Learning")
-    parser.add_argument("--model_type", choices=["vgg", "resnet", "vit"], required=True, help="Choose model type")
+    parser.add_argument("--model_type", choices=["vgg", "resnet"], required=True, help="Choose model type")
     parser.add_argument("--data_dir", default="data/", help="Path to data directory")
     parser.add_argument("--save_path", default="output/model.pth", help="Path to save the trained model")
     parser.add_argument("--epochs", type=int, default=3, help="Number of training epochs")
