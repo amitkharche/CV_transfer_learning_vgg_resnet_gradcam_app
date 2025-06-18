@@ -1,7 +1,7 @@
 
 ---
 
-# 🔍 Project 6: Transfer Learning for Vision (`cv-transfer-learning`)
+# Transfer Learning for Vision (`cv-transfer-learning`)
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![Torch](https://img.shields.io/badge/PyTorch-1.12+-red)
